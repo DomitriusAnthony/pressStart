@@ -3,6 +3,8 @@
   <head>
     <title>PressStart</title>
     <%= csrf_meta_tags %>
+    <%= action_cable_meta_tag %>
+
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -11,7 +13,7 @@
   <body>
 
        <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top navbar-inverse">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header page-scroll">
@@ -19,7 +21,7 @@
                     <span class="sr-only">Toggle navigation</span>
                     Menu
                 </button>
-                <a class="navbar-brand">Rails Blog</a>
+                <a class="navbar-brand">PressStart</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -28,16 +30,15 @@
                   <li class="blog-nav-item"><%= link_to 'Home', root_path %></li>
                   <% if user_signed_in? %>
                     <!--This block is only visible to signed in users -->
-                    <li class="blog-nav-item"><%= link_to 'New Post', new_post_path %></li>
                     <li class="blog-nav-item"><%= link_to 'My Profile', user_path(current_user.id)%></li>
                     <li class="blog-nav-item"><%= link_to 'My Account', edit_user_registration_path  %></li>
                     <li class="blog-nav-item"><%= link_to 'Logout', destroy_user_session_path, :method => :delete %></li>
+                     <li class="blog-nav-item"><a href="/users/:id/inbox">Chat</a></li>
                     <!-- The block ends here -->
                   <% else %>
                     <li class="blog-nav-item"><%= link_to 'Login', new_user_session_path  %></li>
-                    <li class="blog-nav-item"><%= link_to 'Sign Up', new_user_registration_path %></li>
-                  <% end %>
-                </ul>
+                    <% end %>
+                  </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>

@@ -17,6 +17,10 @@ class User < ApplicationRecord
   has_many :reverse_relationships, foreign_key: :followed_id, class_name: 'Relationship'
   has_many :followers, through: :reverse_relationships, source: :follower
 
+    has_many :messages
+  has_many :conversations, foreign_key: :sender_id
+
+
     # Class method to follow a user
   def follow!(user)
     followed << user

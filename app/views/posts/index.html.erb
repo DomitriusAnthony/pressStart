@@ -1,29 +1,126 @@
-<p id="notice"><%= notice %></p>
+<% if user_signed_in? %>
+ 
+  <div class="row">
+    <div class="col-md-3">
 
-<h1>Posts</h1>
+    <%= image_tag current_user.avatar.url(:medium), class: "profile-pic" %>
+    <h2 class="username"><%= @user.username %></h2>
+      
 
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Body</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+    <!-- Profile picture and ETC  -->
 
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.user_id %></td>
-        <td><%= post.body %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<br>
 
-<%= link_to 'New Post', new_post_path %>
+
+    </div>
+
+    <div class="col-md-6">
+      <%= render 'form', post: @post %>
+      
+
+
+      <% if current_user %>
+        <% if @user.followed %>
+      <% @posts.each do |post| %>
+            <div class="feed panel panel-default">
+                <div class="panel-heading">
+                    <% @users.each do |user| %>
+                    <% if post.user_id %>
+                      
+                        <%= image_tag @user.avatar.url, height: '100', width: '150', class: "post-pic" %>
+                        <% end %>
+                      <% end %>
+                    <div><strong>            
+                    <div class="text-center">
+                      <h5><%= link_to "#{User.find(post.user_id).username}", user_path(post.user_id)%></h5>
+                        <i class="fa fa-calendar"></i><br><h6 class="blog-post-meta"><%= post.created_at.strftime('%Y %b %d') %></h6>
+                    </div></strong></div>
+               </div>
+                <div class="panel-body">
+                    <blockquote>
+                      <div class="text-center">
+                        <p class="blog-post-meta"><%= raw(post.body). truncate(358) %></p>
+                      </div>
+                    </blockquote>
+                </div>
+                <div class="panel-footer">
+                    <input type="email" class="form-control" placeholder="Write a comment...">
+                </div>
+            </div>
+         <% end %>
+         <% end %>
+         <% end %>
+         </div>
+    
+
+<!-- These posts show "read more" and can bring you to showing the posts -->
+
+<!-- 
+      <div class="col-lg-6 col-lg-offset-2 col-md-8 col-md-offset-1">
+        <% @posts.each do |post| %>
+          <div class="post-preview">
+            <div class="text-center">
+              <h5><%= link_to "#{User.find(post.user_id).username}", user_path(post.user_id)%></h5>
+              <h6 class="blog-post-meta"><%= post.created_at.strftime('%Y %b %d') %></h6>
+            </div>
+            <div class="text-center">
+              <p class="blog-post-meta"><%= raw(post.body). truncate(358) %></p>
+            </div>
+            <div class="text-center">
+              <%= link_to "READ MORE", post_path(post) %>
+            </div>
+            <div class="text-center">
+            <% if current_user == User.find(post.user_id) %>
+              <%= link_to "Edit", edit_post_path(post), class: "btn btn-default" %>
+              <%= link_to "Delete", post_path(post), class: "btn btn-default", data: {:confirm => "Are you sure?"}, method: :delete %>
+            </div>
+            <%  end %>
+            <hr />
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div> -->
+
+
+      <div class="col-md-3">
+        
+      <P>just holding a spot in this column</P>
+
+      <!-- Some stuff on this side  -->
+
+
+      </div>
+</div>
+
+<% else %>
+
+<div class="container">
+ <!-- Home page without being signed in  -->
+<div class="col-md-12">
+<h1 class="featured-stream">Featured Streamer: Domitrius Clark!</h1>
+<div class="stream home-stream">
+    <iframe
+      src="http://player.twitch.tv/?channel=juicetrades"
+      height="500"
+      width="700"
+      frameborder="0"
+      scrolling="no"
+      allowfullscreen="true">
+    </iframe>
+         
+    <iframe frameborder="no"
+      scrolling="no"
+      id="juicetrades"
+      src="https://www.twitch.tv/juicetrades/chat"
+      height="500"
+      width="400">
+    </iframe>
+</div>
+</div>
+
+<hr>
+
+</div>
+
+<% end %>

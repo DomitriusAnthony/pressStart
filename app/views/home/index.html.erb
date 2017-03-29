@@ -1,40 +1,53 @@
-<header class="intro-header" >
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div class="site-heading">
-          <h1>Rails Blog</h1>
-          <hr class="small">
-          <span class="subheading">Some stuff for the blog</span>
-        </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+
+    <p>holding a spot in this column</p>
+      
+
+    <!-- Profile picture and ETC  -->
+
+
+
+
+    </div>
+
+    <div class="col-md-4">
+      <%= render 'form', post: @post %>
+
+      <div class="col-lg-6 col-lg-offset-2 col-md-8 col-md-offset-1">
+        <% @posts.each do |post| %>
+          <div class="post-preview">
+            <div class="text-center">
+              <h5><%= link_to "#{User.find(post.user_id).username}", user_path(post.user_id)%></h4>
+              <h6 class="blog-post-meta"><%= post.created_at.strftime('%Y %b %d') %></h6>
+            </div>
+            <div class="text-center">
+              <p class="blog-post-meta"><%= raw(post.body). truncate(358) %></p>
+            </div>
+            <div class="text-center">
+              <%= link_to "READ MORE", post_path(post) %>
+            </div>
+            <div class="text-center">
+            <% if current_user == User.find(post.user_id) %>
+              <%= link_to "Edit", edit_post_path(post), class: "btn btn-default" %>
+              <%= link_to "Delete", post_path(post), class: "btn btn-default", data: {:confirm => "Are you sure?"}, method: :delete %>
+            </div>
+            <%  end %>
+            <hr />
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
-</header>
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      <% @posts.each do |post| %>
-        <div class="post-preview">
-          <div class="text-center">
-            <h5><%= link_to "#{User.find(post.user_id).username}", user_path(post.user_id)%></h4>
-            <h6 class="blog-post-meta"><%= post.created_at.strftime('%Y %b %d') %></h6>
-          </div>
-          <div class="text-center">
-            <p class="blog-post-meta"><%= raw(post.body).truncate(358) %></p>
-          </div>
-          <div class="text-center">
-            <%= link_to "READ MORE", post_path(post) %>
-          </div>
-          <div class="text-center">
-          <% if current_user == User.find(post.user_id) %>
-            <%= link_to "Edit", edit_post_path(post), class: "btn btn-default" %>
-            <%= link_to "Delete", post_path(post), class: "btn btn-default", data: {:confirm => "Are you sure?"}, method: :delete %>
-          </div>
-          <% end %>
-          <hr />
-        </div>
-      <% end %>
-    </div>
-  </div>
+
+      <div class="col-md-4">
+        
+      <P>just holding a spot in this column</P>
+
+      <!-- Some stuff on this side  -->
+
+
+      </div>
 </div>
