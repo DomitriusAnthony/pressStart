@@ -4,16 +4,15 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    
     session[:conversations] ||= []
-
-    @users = User.all.where.not(id: current_user)
     @conversations = Conversation.includes(:recipient, :messages).find(session[:conversations])
+    @users = User.all.where.not(id: current_user)
+
+    @post = Post.new
     @posts = Post.all
     @comments = Comment.all
-    @post = Post.new
-    @user = current_user
 
+    @followed = current_user.followed
   end
 
   # GET /posts/1
@@ -70,6 +69,8 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

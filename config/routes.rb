@@ -3,10 +3,12 @@ Rails.application.routes.draw do
 
   resources :posts do
   	resources :comments
+    resources :users
   end
   
   devise_for :users, controllers: { :registrations => "registrations" } do 
     	resources :users, :only => [:show]
+      resources :posts, :only => [:index]
     end
 
   get 'users/:id/follow' => 'users#follow', as: "user_follow"
