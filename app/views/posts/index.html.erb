@@ -1,0 +1,209 @@
+<% if user_signed_in? %>
+ 
+	<div class="row">
+		<div class="col-md-3">
+		<!-- Profile picture and ETC  -->
+
+		
+
+		<%= image_tag current_user.avatar.url(:medium), class: "profile-pic" %>
+		<h2 class="username"><%= current_user.username %></h2>
+		<%= link_to 'Edit details', edit_user_registration_path, class: "btn btn-primary edit-details"  %>
+			
+
+		
+
+		</div>
+
+		<div class="col-md-6">
+			<%= render 'form', post: @post %>
+			
+			<% @followed.each do |followed| %>
+				<% followed.posts.by_date.each do |post| %>
+						<div class="feed panel panel-default">
+								<div class="panel-heading">
+												<%= image_tag post.user.avatar.url, height: '100', width: '150', class: "post-pic" %>
+										<div><strong>            
+										<div class="text-center">
+											<h5><%= link_to "#{User.find(post.user_id).username}", user_path(post.user_id)%></h5>
+												<i class="fa fa-calendar"></i><br><h6 class="blog-post-meta"><%= post.created_at.strftime('%Y %b %d') %></h6>
+										</div></strong></div>
+							 </div>
+								<div class="panel-body">
+										<blockquote>
+											<div class="text-center">
+												<p class="blog-post-meta"><%= raw(post.body). truncate(358) %></p>
+											</div>
+										</blockquote>
+								</div>
+								<div class="panel-footer">
+										<input type="email" class="form-control" placeholder="Write a comment...">
+								</div>
+						</div>
+				 <% end %>
+			<% end %>
+
+
+
+
+
+				 </div>
+		
+
+<!-- These posts show "read more" and can bring you to showing the posts -->
+
+<!-- 
+			<div class="col-lg-6 col-lg-offset-2 col-md-8 col-md-offset-1">
+				<% @posts.each do |post| %>
+					<div class="post-preview">
+						<div class="text-center">
+							<h5><%= link_to "#{User.find(post.user_id).username}", user_path(post.user_id)%></h5>
+							<h6 class="blog-post-meta"><%= post.created_at.strftime('%Y %b %d') %></h6>
+						</div>
+						<div class="text-center">
+							<p class="blog-post-meta"><%= raw(post.body). truncate(358) %></p>
+						</div>
+						<div class="text-center">
+							<%= link_to "READ MORE", post_path(post) %>
+						</div>
+						<div class="text-center">
+						<% if current_user == User.find(post.user_id) %>
+							<%= link_to "Edit", edit_post_path(post), class: "btn btn-default" %>
+							<%= link_to "Delete", post_path(post), class: "btn btn-default", data: {:confirm => "Are you sure?"}, method: :delete %>
+						</div>
+						<%  end %>
+						<hr />
+					</div>
+				<% end %>
+			</div>
+		</div>
+	</div> -->
+
+
+			<div class="col-md-3">
+				
+			<P>just holding a spot in this column</P>
+
+			<!-- Some stuff on this side  -->
+
+
+			</div>
+</div>
+
+<% else %>
+
+
+ <!-- Home page without being signed in  -->
+<div class="col-md-12 stream-container">
+
+
+<h1 class="featured-stream">Featured Streamer: Domitrius Clark!</h1>
+<div class="stream home-stream">
+		<iframe
+			class= "stream-css"
+			src="http://player.twitch.tv/?channel=juicetrades"
+			height="500"
+			width="700"
+			frameborder="0"
+			scrolling="no"
+			allowfullscreen="true">
+		</iframe>
+				 
+		<iframe 
+			class="steam-css" 
+			frameborder="no"
+			scrolling="no"
+			id="juicetrades"
+			src="https://www.twitch.tv/juicetrades/chat"
+			height="500"
+			width="400">
+		</iframe>
+</div>
+</div>
+
+<div class="col-md-12 empty-box">
+	
+
+
+</div>
+
+
+
+
+<!-- image slideshow -->
+<div class="col-md-7">
+	<!-- Carousel -->
+    	<div id="carousel-example-generic" class="carousel slide carousel-box" data-ride="carousel">
+			<!-- Indicators -->
+			<ol class="carousel-indicators">
+			  	<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+			    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+			    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+			</ol>
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner">
+			    <div class="item active">
+			    	<img src="http://unsplash.s3.amazonaws.com/batch%209/barcelona-boardwalk.jpg" alt="First slide">
+                    <!-- Static Header -->
+                    <div class="header-text hidden-xs">
+                        <div class="col-md-12 text-center">
+                            <h2>
+                            	<span>Welcome to <strong>LOREM IPSUM</strong></span>
+                            </h2>
+                            <br>
+                            <br>
+                            <div class="">
+                                <a class="btn btn-theme btn-sm btn-min-block" href="#">Login</a><a class="btn btn-theme btn-sm btn-min-block" href="#">Register</a></div>
+                        </div>
+                    </div><!-- /header-text -->
+			    </div>
+			    <div class="item">
+			    	<img src="http://unsplash.s3.amazonaws.com/batch%209/barcelona-boardwalk.jpg" alt="Second slide">
+			    	<!-- Static Header -->
+                    <div class="header-text hidden-xs">
+                        <div class="col-md-12 text-center">
+                            <h2>
+                                <span>Welcome to LOREM IPSUM</span>
+                            </h2>
+                            <br>
+                            <br>
+                            <div class="">
+                                <a class="btn btn-theme btn-sm btn-min-block" href="#">Login</a><a class="btn btn-theme btn-sm btn-min-block" href="#">Register</a></div>
+                        </div>
+                    </div><!-- /header-text -->
+			    </div>
+			    <div class="item">
+			    	<img src="http://unsplash.s3.amazonaws.com/batch%209/barcelona-boardwalk.jpg" alt="Third slide">
+			    	<!-- Static Header -->
+                    <div class="header-text hidden-xs">
+                        <div class="col-md-12 text-center">
+                            <h2>
+                                <span>Welcome to LOREM IPSUM</span>
+                            </h2>
+                            <br>
+                            <br>
+                            <div class="">
+                                <a class="btn btn-theme btn-sm btn-min-block" href="#">Login</a><a class="btn btn-theme btn-sm btn-min-block" href="#">Register</a></div>
+                        </div>
+                    </div><!-- /header-text -->
+			    </div>
+			</div>
+			<!-- Controls -->
+			<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+		    	<span class="glyphicon glyphicon-chevron-left"></span>
+			</a>
+			<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+		    	<span class="glyphicon glyphicon-chevron-right"></span>
+			</a>
+		</div><!-- /carousel -->
+</div>
+
+<!-- landing page signup form -->
+<div class="col-md-4">
+<div class="signup-form">
+	<%= render "devise/registrations/new" %>
+</div>
+</div>
+
+
+<% end %>
