@@ -12,7 +12,7 @@ class PostsController < ApplicationController
     @posts = Post.all
     @comments = Comment.all
 
-    @followed = current_user.followed
+    @followed = current_user.followed if signed_in?
   end
 
   # GET /posts/1

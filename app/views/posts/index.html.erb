@@ -2,20 +2,21 @@
  
 	<div class="row">
 		<div class="col-md-3">
+		<!-- Profile picture and ETC  -->
 
 		<%= image_tag current_user.avatar.url(:medium), class: "profile-pic" %>
 		<h2 class="username"><%= current_user.username %></h2>
 			
 
-		<!-- Profile picture and ETC  -->
+		
 
 		</div>
 
 		<div class="col-md-6">
 			<%= render 'form', post: @post %>
 			
-			<% @followed.each do |nigga| %>
-				<% nigga.posts.each do |post| %>
+			<% @followed.each do |followed| %>
+				<% followed.posts.by_date.each do |post| %>
 						<div class="feed panel panel-default">
 								<div class="panel-heading">
 												<%= image_tag post.user.avatar.url, height: '100', width: '150', class: "post-pic" %>
@@ -88,12 +89,15 @@
 
 <% else %>
 
-<div class="container">
+
  <!-- Home page without being signed in  -->
-<div class="col-md-12">
+<div class="col-md-12 stream-container">
+
+
 <h1 class="featured-stream">Featured Streamer: Domitrius Clark!</h1>
 <div class="stream home-stream">
 		<iframe
+			class= "stream-css"
 			src="http://player.twitch.tv/?channel=juicetrades"
 			height="500"
 			width="700"
@@ -102,7 +106,9 @@
 			allowfullscreen="true">
 		</iframe>
 				 
-		<iframe frameborder="no"
+		<iframe 
+			class="steam-css" 
+			frameborder="no"
 			scrolling="no"
 			id="juicetrades"
 			src="https://www.twitch.tv/juicetrades/chat"
@@ -112,7 +118,8 @@
 </div>
 </div>
 
-<hr style="color: black">
+
+
 
 <!-- image slideshow -->
 <div class="col-md-6">
