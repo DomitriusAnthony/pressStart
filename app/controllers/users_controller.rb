@@ -3,7 +3,6 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		@feed = Post.feed(@user)
     @users = User.all
-    @post = Post.find(params[:id])
     @posts = Post.all
 
   	end
