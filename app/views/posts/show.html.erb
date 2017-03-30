@@ -6,7 +6,7 @@
       <h4><%= link_to "#{User.find(@post.user_id).username}", user_path(@post.user_id)%></h4>
       <h5><%= @post.created_at.strftime('%Y %b %d') %></h5>
       <div><%= raw @post.body %></div>
-      <% if current_user == User.find(@post.user_id) %>
+      <% if current_user %>
         <%= link_to "Edit", edit_post_path(@post), class: "btn btn-default" %>
         <%= link_to "Delete", post_path(@post), class: "btn btn-default", data: {:confirm => "Are you sure?"}, method: :delete %>
       <% end %>
