@@ -1,65 +1,160 @@
-   <div class="container-fluid padded">
-  <h1><%= @user.username %>'s Profile</h1>
-  <h3><%= "#{@user.followers.count} followers, #{@user.followed.count} followed." %></h3>
-  <% if current_user %>
-    <% if @user.followers.include?(current_user) %>
-      <h3>You're following this user!</h3>
-      <%= link_to "Stop following this user", destroy_user_follow_path %>
-    <% else %>
-      <%= link_to "Follow this user", user_follow_path %>
-    <% end %>
-    <% if @feed.empty? %>
-      <h2>No posts to display!</h2>
-    <% else %>
-      <hr>
-      <h2>Feed</h2>
-      <% @feed.each do |post| %>
-        <div class="col-xs-12 text-center">
-          <div class="text-center">
-            <h4><%= link_to "#{User.find(post.user_id).username}", user_path(post.user_id)%></h4>
-            <h6><%= post.created_at.strftime('%Y %b %d') %></h6>
-          </div>
-          <div>
-            <%= raw(post.body).truncate(358) %>
-          </div>
-          <div class="text-center">
-            <%= link_to "READ MORE", post_path(post) %>
-          </div>
-          <% if current_user == User.find(post.user_id) %>
-            <%= link_to "Edit", edit_post_path(post), class: "btn btn-default" %>
-            <%= link_to "Delete", post_path(post), class: "btn btn-default", data: {:confirm => "Are you sure?"}, method: :delete %>
-          <% end %>
-          <hr />
-        </div>
-      <% end %>
-    <% end %>
-  <% else %>
-    <h2>Log in to see details!</h2>
-  <% end %>
+<div class="row">
+	<div class="business-card">
+	<div class="col-md-4">
+
+							<div class="text-center card-box">
+								<div class="member-card">
+										<div class="thumb-xl member-thumb m-b-10 center-block">
+												<%= image_tag @user.avatar.url, size: "250x250", class: "img-circle img-thumbnail" %> 
+										</div>
+
+										<div class="">
+												<h4 class="m-b-5"><%= @user.username %></h4>
+										</div>
+										<% if current_user %>
+											<% if @user.followers.include?(current_user) %>
+													<%= link_to "Unfollow", destroy_user_follow_path, class: "btn btn-danger" %>
+											<% else %>
+												<%= link_to "Follow", user_follow_path, class: "btn btn-success btn-sm w-sm waves-effect m-t-10 waves-light" %>
+											<% end %>
+										<% end %>
+										<button type="button" class="btn btn-danger btn-sm w-sm waves-effect m-t-10 waves-light">Message</button>
+										
+										<div class="text-center m-t-40">
+												<p class="text-muted font-13"><strong></strong> <span class="m-l-15"></span></p>
+										</div>
+
+										<ul class="social-links list-inline m-t-30">
+												<li>
+														<a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
+												</li>
+												<li>
+														<a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
+												</li>
+												<li>
+														<a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a>
+												</li>
+										</ul>
+								</div>
+						</div> <!-- end card-box -->
+	
+	</div>
+
+	<div class="col-md-8">
+
+		 <% if  @user.stream_username %>
+					<div class="stream">
+						<iframe
+								src="http://player.twitch.tv/?channel=<%= @user.stream_username %>"
+								height="510"
+								width="600"
+								frameborder="0"
+								scrolling="no"
+								allowfullscreen="true">
+						</iframe>
+				 
+						<iframe frameborder="no"
+							scrolling="no"
+							id="juicetrades"
+							src="https://www.twitch.tv/<%= @user.stream_username %>/chat"
+							height="510"
+							width="300">
+						</iframe>
+						</div>
+		<% else %>
+			<h1> There is no stream for this User</h1>      
+		<% end %>
+	
+		</div>
+	</div>
 </div>
 
-  <%= image_tag @user.avatar.url(:medium) %>
 
-   <% if  @user.stream_username %>
-          <div class="stream">
-            <iframe
-                src="http://player.twitch.tv/?channel=<%= @user.stream_username %>"
-                height="500"
-                width="700"
-                frameborder="0"
-                scrolling="no"
-                allowfullscreen="true">
-            </iframe>
-         
-            <iframe frameborder="no"
-              scrolling="no"
-              id="juicetrades"
-              src="https://www.twitch.tv/<%= @user.stream_username %>/chat"
-              height="500"
-              width="400">
-            </iframe>
-            </div>
-    <% else %>
-      <h1> There is no stream for this User</h1>      
-    <% end %>
+<div class="row second-profile-content">
+	<div class="col-md-6">
+
+	<!-- bio and info  -->
+	
+	</div>
+	<div class="col-md-6">
+
+	<!-- users posts -->
+	
+	<% @user.posts.by_date.each do |post| %>
+			<div class="feed panel panel-default">
+				<div class="panel-heading">
+					<%= image_tag post.user.avatar.url, height: '100', width: '150', class: "post-pic" %>
+				<div><strong>            
+			<div class="text-center">
+					<h5><%= link_to "#{User.find(post.user_id).username}", user_path(post.user_id)%></h5>
+												<i class="fa fa-calendar"></i><br><h6 class="blog-post-meta"><%= post.created_at.strftime('%Y %b %d') %></h6>
+										</div></strong></div>
+							 </div>
+								<div class="panel-body">
+										<blockquote>
+											<div class="text-center">
+												<p class="blog-post-meta"><%= raw(post.body). truncate(358) %></p>
+											</div>
+										</blockquote>
+								</div>
+								<div class="panel-footer">
+										<input type="email" class="form-control" placeholder="Write a comment...">
+								</div>
+						</div>
+	<% end %>
+	
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!--    <div class="container-fluid padded">
+	<h1><%= @user.username %>'s Profile</h1>
+	<h3><%= "#{@user.followers.count} followers, #{@user.followed.count} followed." %></h3>
+	<% if current_user %>
+		<% if @user.followers.include?(current_user) %>
+			<h3>You're following this user!</h3>
+			<%= link_to "Stop following this user", destroy_user_follow_path %>
+		<% else %>
+			<%= link_to "Follow this user", user_follow_path %>
+		<% end %>
+		<% if @feed.empty? %>
+			<h2>No posts to display!</h2>
+		<% else %>
+			<hr>
+			<h2>Feed</h2>
+			<% @feed.each do |post| %>
+				<div class="col-xs-12 text-center">
+					<div class="text-center">
+						<h4><%= link_to "#{User.find(post.user_id).username}", user_path(post.user_id)%></h4>
+						<h6><%= post.created_at.strftime('%Y %b %d') %></h6>
+					</div>
+					<div>
+						<%= raw(post.body).truncate(358) %>
+					</div>
+					<div class="text-center">
+						<%= link_to "READ MORE", post_path(post) %>
+					</div>
+					<% if current_user == User.find(post.user_id) %>
+						<%= link_to "Edit", edit_post_path(post), class: "btn btn-default" %>
+						<%= link_to "Delete", post_path(post), class: "btn btn-default", data: {:confirm => "Are you sure?"}, method: :delete %>
+					<% end %>
+					<hr />
+				</div>
+			<% end %>
+		<% end %>
+	<% else %>
+		<h2>Log in to see details!</h2>
+	<% end %>
+</div> -->
+
+
 

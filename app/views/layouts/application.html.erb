@@ -25,12 +25,16 @@
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-left">
                   <li class="blog-nav-item"><%= link_to 'Home', root_path %></li>
                   <% if user_signed_in? %>
                     <!--This block is only visible to signed in users -->
-                    <li class="blog-nav-item"><%= link_to 'My Profile', user_path(current_user.id)%></li>
+                    <li class="blog-nav-item"><a href="/users/<%= current_user.id %>">
+                  <% if current_user %>
+                    <%= current_user.username %>
+                  <% end %>
+                  </a></li>
                     <li class="blog-nav-item"><%= link_to 'My Account', edit_user_registration_path  %></li>
                     <li class="blog-nav-item"><%= link_to 'Logout', destroy_user_session_path, :method => :delete %></li>
                      <li class="blog-nav-item"><a href="/users/:id/inbox">Chat</a></li>
