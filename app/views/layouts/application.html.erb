@@ -35,9 +35,8 @@
                     <%= current_user.username %>
                   <% end %>
                   </a></li>
-                    <li class="blog-nav-item"><%= link_to 'My Account', edit_user_registration_path  %></li>
+                    <li class="blog-nav-item"><a href="/users/:id/inbox">Chat</a></li>
                     <li class="blog-nav-item"><%= link_to 'Logout', destroy_user_session_path, :method => :delete %></li>
-                     <li class="blog-nav-item"><a href="/users/:id/inbox">Chat</a></li>
                     <!-- The block ends here -->
                   <% else %>
                     <li class="blog-nav-item"><%= link_to 'Login', new_user_session_path  %></li>

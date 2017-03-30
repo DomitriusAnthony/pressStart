@@ -8,7 +8,7 @@
 
 		<%= image_tag current_user.avatar.url(:medium), class: "profile-pic" %>
 		<h2 class="username"><%= current_user.username %></h2>
-		<%= button_to 'Edit details', edit_user_registration_path, class: "btn btn-primary edit-details"  %>
+		<%= link_to 'Edit details', edit_user_registration_path, class: "btn btn-primary edit-details"  %>
 			
 
 		
@@ -121,6 +121,12 @@
 </div>
 </div>
 
+<div class="col-md-12 empty-box">
+	
+
+
+</div>
+
 
 
 
@@ -199,16 +205,5 @@
 </div>
 </div>
 
-<hr style="color: black;">
-
-<div class="col-md-12">
-	
-<h2>What is PressStart?</h2>
-
-<p>Information about what this new and exciting site can do for you!</p>
-
-</div>
-
-</div>
 
 <% end %>
