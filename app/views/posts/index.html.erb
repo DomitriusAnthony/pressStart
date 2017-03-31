@@ -18,8 +18,9 @@
 		<div class="col-md-6">
 			<%= render 'form', post: @post %>
 			
-			<% @followed.each do |followed| %>
+			<%  @followed.each do |followed| %>
 				<% followed.posts.by_date.each do |post| %>
+					
 						<div class="feed panel panel-default">
 								<div class="panel-heading">
 												<%= image_tag post.user.avatar.url, height: '100', width: '150', class: "post-pic" %>
@@ -30,14 +31,11 @@
 										</div></strong></div>
 							 </div>
 								<div class="panel-body">
-									
+										<blockquote>
 											<div class="text-center">
 												<p class="blog-post-meta"><%= raw(post.body). truncate(358) %></p>
 											</div>
-											<td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-											 <td><%= link_to 'Edit', edit_post_path(post) %></td>
-
-								
+										</blockquote>
 								</div>
 								<div class="panel-footer">
 										<input type="email" class="form-control" placeholder="Write a comment...">
@@ -45,6 +43,7 @@
 						</div>
 				 <% end %>
 			<% end %>
+
 
 
 

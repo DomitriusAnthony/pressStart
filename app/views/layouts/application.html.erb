@@ -27,7 +27,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-left">
-                  <li class="blog-nav-item"><%= link_to 'Home', root_path %></li>
+                  <li class="blog-nav-item"><%= link_to 'Home', root_path, class: "nav-link" %></li>
                   <% if user_signed_in? %>
                     <!--This block is only visible to signed in users -->
                     <li class="blog-nav-item"><a href="/users/<%= current_user.id %>">
@@ -35,11 +35,11 @@
                     <%= current_user.username %>
                   <% end %>
                   </a></li>
-                    <li class="blog-nav-item"><a href="/users/:id/inbox">Chat</a></li>
-                    <li class="blog-nav-item"><%= link_to 'Logout', destroy_user_session_path, :method => :delete %></li>
+                    <li class="blog-nav-item"><a class="nav-link" href="/users/:id/inbox">Chat</a></li>
+                    <li class="blog-nav-item"><%= link_to 'Logout', destroy_user_session_path, :method => :delete, class: "nav-link" %></li>
                     <!-- The block ends here -->
                   <% else %>
-                    <li class="blog-nav-item"><%= link_to 'Login', new_user_session_path  %></li>
+                    <li class="blog-nav-item"><%= link_to 'Login', new_user_session_path, class: "nav-link"  %></li>
                     <% end %>
                   </ul>
             </div>

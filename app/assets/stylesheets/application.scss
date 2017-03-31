@@ -19,9 +19,19 @@
 @import "bootstrap";
 
 body{
-  background-color: #7A7A7A;
+  background-color: #D3D3D3;
 }
 
+.navbar{
+  background-color: #00C957;
+}
+
+.navbar .nav > li > a{
+  color: white;
+}
+ul.nav a:hover { 
+  color: black!important; 
+}
 ul {
   padding-left: 0px;
   list-style: none;
