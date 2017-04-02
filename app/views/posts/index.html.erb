@@ -84,7 +84,10 @@
 
 			<div class="col-md-3">
 				
-			<P>just holding a spot in this column</P>
+			 <%  @followed.each do |followed| %>
+			 	
+			 		<a href="users/<%= followed.id %>"><%= image_tag(followed.avatar.url, class: "friends-list") %></a>
+			 <% end %>
 
 			<!-- Some stuff on this side  -->
 
