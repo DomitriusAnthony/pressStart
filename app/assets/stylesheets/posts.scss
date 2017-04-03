@@ -7,13 +7,7 @@
 		text-align: center;
 		color: #47d147
 }
-/*.stream-container{
-		position: relative;
-		height: 715px;
-		width: 100%;
-		background-color: black;
 
-}*/
 .home-stream{
     margin-top: 50px;
 		margin-left: 150px;
@@ -28,6 +22,48 @@
 	-webkit-box-shadow: 4px 4px 14px #000;
 	box-shadow: 4px 4px 14px #000;
 
+}
+
+.stream-container{
+    background-image: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('gaming-icons.jpg');
+    background-size: cover;
+    height: 600px;
+    margin-top: -22px;
+}
+
+#carousel-example-generic{
+  margin-left: 50px;
+}
+
+/*landing page after signing in*/
+
+.followed-users{
+  margin-right: 100px;
+  margin-top: 30px;
+}
+
+.friends-list{
+  height: 100px;
+  width: 100px;
+}
+
+.profile-pic{
+  width: 200px;
+  height: 200px;
+  margin-left: 80px;
+}
+
+.user-home{
+  margin-left: 100px;
+}
+
+.post-pic{
+  height: 100px;
+  width: 100px
+}
+
+.feed{
+  margin: 0 auto;
 }
 
 
@@ -386,6 +422,8 @@ margin-right: 7px;
     border-color: #fff;
 }
 
+
+
 /*user card styling*/
 
 body{padding-top:30px;}
@@ -404,21 +442,9 @@ color: #999;
   height: 100px;
 }
 
-.friends-list{
-  height: 150px;
-  width: 150px;
-}
 
-.stream-container{
-    background-image: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('gaming-icons.jpg');
-    background-size: cover;
-    height: 600px;
-    margin-top: -22px;
-}
 
-#carousel-example-generic{
-  margin-left: 50px;
-}
+
 
 
 

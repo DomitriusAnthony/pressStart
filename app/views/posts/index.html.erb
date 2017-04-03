@@ -1,29 +1,31 @@
 <% if user_signed_in? %>
- 
-	<div class="row">
+ <div class="container-fluid">
+ 	<div class="row">
 		<div class="col-md-3">
 		<!-- Profile picture and ETC  -->
 
 		
-
+		<div class="user-home">
 		<%= image_tag current_user.avatar.url(:medium), class: "profile-pic" %>
 		<h2 class="username"><%= current_user.username %></h2>
 		<%= link_to 'Edit details', edit_user_registration_path, class: "btn btn-primary edit-details"  %>
+		</div>
 			
 
 		
 
 		</div>
 
-		<div class="col-md-6">
+		<div class="col-md-5">
+			<div class="feed">
 			<%= render 'form', post: @post %>
 			
 			<%  @followed.each do |followed| %>
 				<% followed.posts.by_date.each do |post| %>
 					
-						<div class="feed panel panel-default">
+						<div class="panel panel-default">
 								<div class="panel-heading">
-												<%= image_tag post.user.avatar.url, height: '100', width: '150', class: "post-pic" %>
+												<%= image_tag post.user.avatar.url, class: "post-pic" %>
 										<div><strong>            
 										<div class="text-center">
 											<h5><%= link_to "#{User.find(post.user_id).username}", user_path(post.user_id)%></h5>
@@ -44,13 +46,25 @@
 				 <% end %>
 			<% end %>
 
+			</div>
+			</div>
 
 
+			<div class="col-md-3">
 
-
+				<div class="followed-users">
+				
+			 		<%  @followed.each do |followed| %>
+						<a href="users/<%= followed.id %>"><%= image_tag(followed.avatar.url, class: "friends-list") %></a>
+			 		<% end %>
 
 				 </div>
-		
+			</div>
+</div>
+</div>
+
+
+		<% else %>
 
 <!-- These posts show "read more" and can bring you to showing the posts -->
 
@@ -61,41 +75,13 @@
 						<div class="text-center">
 							<h5><%= link_to "#{User.find(post.user_id).username}", user_path(post.user_id)%></h5>
 							<h6 class="blog-post-meta"><%= post.created_at.strftime('%Y %b %d') %></h6>
-						</div>
-						<div class="text-center">
-							<p class="blog-post-meta"><%= raw(post.body). truncate(358) %></p>
-						</div>
 						<div class="text-center">
 							<%= link_to "READ MORE", post_path(post) %>
 						</div>
-						<div class="text-center">
-						<% if current_user == User.find(post.user_id) %>
-							<%= link_to "Edit", edit_post_path(post), class: "btn btn-default" %>
-							<%= link_to "Delete", post_path(post), class: "btn btn-default", data: {:confirm => "Are you sure?"}, method: :delete %>
-						</div>
-						<%  end %>
-						<hr />
-					</div>
-				<% end %>
-			</div>
-		</div>
-	</div> -->
+						<% end %> -->
 
 
-			<div class="col-md-3">
-				
-			 <%  @followed.each do |followed| %>
-			 	
-			 		<a href="users/<%= followed.id %>"><%= image_tag(followed.avatar.url, class: "friends-list") %></a>
-			 <% end %>
 
-			<!-- Some stuff on this side  -->
-
-
-			</div>
-</div>
-
-<% else %>
 
 
  <!-- Home page without being signed in  -->
