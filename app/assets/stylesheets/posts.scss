@@ -7,15 +7,15 @@
 		text-align: center;
 		color: #47d147
 }
-.stream-container{
+/*.stream-container{
 		position: relative;
 		height: 715px;
 		width: 100%;
 		background-color: black;
 
-}
+}*/
 .home-stream{
-		margin-left: 100px;
+		margin-left: 150px;
 }
 
 .stream-css{
@@ -400,7 +400,7 @@ color: #999;
 /*This is for the space to seperate content on the home page*/
 .empty-box{
   position: absolute;
-  height: 150px;
+  height: 100px;
 }
 
 .friends-list{
@@ -408,7 +408,16 @@ color: #999;
   width: 150px;
 }
 
+.stream-container{
+    background-image: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('gaming-icons.jpg');
+    background-size: cover;
+    height: 600px;
+    margin-top: -22px;
+}
 
+#carousel-example-generic{
+  margin-left: 50px;
+}
 
 
 
