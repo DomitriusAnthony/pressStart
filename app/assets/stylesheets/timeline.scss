@@ -383,7 +383,7 @@ footer .container .text-muted {
 }
 
 .widget-buttons.compact:hover {
-    background-color: #2dc3e8;
+    background-color: #1ED16E; /*here*/
     -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, .2);
     -moz-box-shadow: 0 0 20px rgba(0, 0, 0, .2);
     box-shadow: 0 0 20px rgba(0, 0, 0, .2)
@@ -403,7 +403,7 @@ footer .container .text-muted {
     width: 4px;
     max-width: 4px;
     overflow: hidden;
-    background-color: #2dc3e8
+    background-color: #1ED16E /*here*/
 }
 
 .widget-buttons.compact a {
@@ -597,8 +597,8 @@ footer .container .text-muted {
 .bordered-darkorange {
     border-color: #ed4e2a !important;
 }
-.bordered-sky {
-    border-color: #2dc3e8 !important;
+.bordered-nav {
+    border-color: #1ED16E !important;
 }
 .bordered-yellow {
     border-color: #ffce55 !important;
@@ -1013,7 +1013,7 @@ h4, .h4 {
 
 /*================== home profile nav ===============*/
 .profile-nav .user-heading {
-    background: #2dc3e8;
+    background: #1ED16E; /*here*/
     color: #fff;
     border-radius: 4px 4px 0 0;
     -webkit-border-radius: 4px 4px 0 0;
@@ -1068,7 +1068,7 @@ h4, .h4 {
 
 .profile-nav ul > li > a:hover, .profile-nav ul > li > a:focus, .profile-nav ul li.active  a {
     background: #f8f7f5 !important;
-    border-left: 5px solid #2dc3e8;
+    border-left: 5px solid #1ED16E; /*here*/
     color: #89817f !important;
 }
 

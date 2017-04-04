@@ -2,9 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/*/
 
-/* ===========
-   Profile
- =============*/
+/* ===========Profile=============*/
 .card-box {
   padding: 20px;
   box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.06), 0 2px 0 0 rgba(0, 0, 0, 0.02);
@@ -14,7 +12,8 @@
   background-clip: padding-box;
   margin-bottom: 20px;
   background-color: #ffffff;
-  margin-left: 40px;
+  margin-left: 140px;
+  margin-right: -20px;
 }
 .header-title {
   text-transform: uppercase;
@@ -36,18 +35,15 @@
   width: 30px;
 }
 .business-card{
-	position: absolute;
-	height: 550px;
-	width: 100%;
-	border-bottom: 3px solid black;
+  margin-top: 150px;
 }
 
 .second-profile-content{
-  margin-top: 600px;
+  margin-top: 700px;
 }
 
 
-/*edit user information styles*/
+/*===========edit user information styles===========*/
 .red{
     color:red;
     }
@@ -71,6 +67,15 @@
 }
 
 .card-picture{
-  height: 300px;
-  width: 300px;
+  height: 185px;
+  width: 185px;
+}
+
+.user-card{
+    position: absolute;
+    background-image: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('characters.jpg');
+    background-size: cover;
+    height: 650px;
+    width: 100%;
+    margin-top: -22px;
 }

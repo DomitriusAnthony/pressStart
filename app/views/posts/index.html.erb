@@ -1,20 +1,34 @@
 <% if user_signed_in? %>
- <div class="container-fluid">
- 	<div class="row">
-		<div class="col-md-3">
-		<!-- Profile picture and ETC  -->
+ <div class="container-fluid ">
+      <div class="row fix-padding">
+        <!-- left links -->
+        <div class="col-md-3 profile-div ">
+          <div class="profile-nav ">
+            <div class="widget">
+              <div class="widget-body">
+                <div class="user-heading round">
+                	<img src="<%= current_user.avatar.url %>">
+                    <h1><%= current_user.username %></h1>
+                  <p><%= current_user.fname + " " + current_user.lname %></p>
+                </div>
 
-		
-		<div class="user-home">
-		<%= image_tag current_user.avatar.url(:medium), class: "profile-pic" %>
-		<h2 class="username"><%= current_user.username %></h2>
-		<%= link_to 'Edit details', edit_user_registration_path, class: "btn btn-primary edit-details"  %>
-		</div>
-			
-
-		
-
-		</div>
+                <ul class="nav nav-pills nav-stacked">
+                  <li class="active"><a href="/users/edit"> <i class="fa fa-user"></i>Edit Details</a></li>
+                  <li>
+                    <a href="/users/inbox/:id"> 
+                      <i class="fa fa-envelope"></i> Messages 
+                      <span class="label label-info pull-right r-activity"></span>
+                    </a>
+                  </li>
+                  <li><a href="#"> <i class="fa fa-calendar"></i> Events</a></li>
+                  <li><a href="#"> <i class="fa fa-image"></i> Photos</a></li>
+                  <li><a href="#"> <i class="fa fa-share"></i> Browse</a></li>
+                  <li><a href="#"> <i class="fa fa-floppy-o"></i> Saved</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div><!-- end left links -->
 
 		<div class="col-md-5">
 			<div class="feed">
@@ -51,15 +65,51 @@
 
 
 			<div class="col-md-3">
+			
+				 <div class="widget user-listing">
+            <div class="widget-header">
+              <h3 class="widget-caption">People You May Know</h3>
+            </div>
+            <div class="widget-body bordered-top bordered-nav">
+              <div class="card">
+                  <div class="content">
+                  	<%  @users.each do |user| %>
+                      <ul class="list-unstyled team-members">
+                          <li>
+                              <div class="row">
+                                  <div class="col-xs-3">
+                                      <div class="avatar">
+                                          <a href="/users/<%= user.id %>"><img src="<%= user.avatar.url %>" class="img-circle img-no-padding img-responsive"></a>
+                                      </div>
+                                  </div>
+                                  <div class="col-xs-6">
+                                     <%= user.username %>
+                                  </div>
+                      
+                                  <div class="col-xs-3 text-right">
+                                  <% if current_user.followed.include?(@user) %>
+                                  	<a href="/users/<%= user.id %>/follow"><btn class="btn btn-sm btn-azure btn-icon"><i class="fa fa-user-plus"></i></btn></a>
+                                  <% else %>
+ 									<a href="/users/<%= user.id %>/follow/destroy"><btn class="btn btn-sm btn-red btn-icon"><i class="fa fa-minus-square"></i></btn></a>
+                                  <% end %>
+                                  </div>
 
-				<div class="followed-users">
-					<h2>All Users</h2>
-			 		<%  @users.each do |user| %>
-						<a href="users/<%= user.id %>"><%= image_tag(user.avatar.url, class: "friends-list") %></a>
-			 		<% end %>
+                              </div>
+                          </li>
+                      </ul>
+                      <% end %>
+                  </div>
+              </div>          
+            </div>
+          </div><!-- End people yout may know --> 
+        </div><!-- end right posts -->
+      </div>
+    </div>
 
-				 </div>
+
 			</div>
+
+
 </div>
 </div>
 

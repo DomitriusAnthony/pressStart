@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     resources :messages, only: [:create]
   end
 
-  get 'users/:id/inbox' => "inbox#inbox"
+  get 'users/inbox/:id' => "inbox#inbox"
 
   get '/streams' => "users#streams"
  end

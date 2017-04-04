@@ -2,7 +2,7 @@
  They will automatically be included in application.css.
  You can use Sass (SCSS) here: http://sass-lang.com/*/
 
-/*Landing page without signing in */
+/*===================Landing page without signing in===================== */
 .featured-stream{
 		text-align: center;
 		color: #47d147
@@ -35,22 +35,15 @@
   margin-left: 50px;
 }
 
-/*landing page after signing in*/
+/*===============landing page after signing in=================*/
 
 .followed-users{
-  margin-right: 100px;
   margin-top: 30px;
 }
 
 .friends-list{
   height: 100px;
   width: 100px;
-}
-
-.profile-pic{
-  width: 200px;
-  height: 200px;
-  margin-left: 80px;
 }
 
 .user-home{
@@ -62,13 +55,21 @@
   width: 100px
 }
 
-.feed{
-  margin: 0 auto;
+.fix-padding{
+  padding-left: 80px!important;
 }
 
+.user-listing{
+  margin-left: 20px !important;
+}
 
+.feed{
+  margin-top: -30px !important;
+  margin-left: -30px !important;
+}
 
-/*This is styling for the box to post a status*/
+/*=============This is styling for the box to post a status===============*/
+
 body{ background: #fafafa;}
 .widget-area.blank {
 background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
@@ -216,7 +217,7 @@ margin-right: 7px;
 }
 
 
-/* Profile container */
+/*================= Profile container ==================*/
 .profile {
   margin: 20px 0;
 }
@@ -424,7 +425,7 @@ margin-right: 7px;
 
 
 
-/*user card styling*/
+/*=============user card styling===============*/
 
 body{padding-top:30px;}
 
@@ -436,7 +437,8 @@ line-height: 1.428571429;
 color: #999;
 }
 
-/*This is for the space to seperate content on the home page*/
+/*=============This is for the space to seperate content on the home page=============*/
+
 .empty-box{
   position: absolute;
   height: 100px;

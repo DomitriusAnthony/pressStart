@@ -1,4 +1,5 @@
-<div class="row">
+<div class="container-fluid">
+<div class="row user-card">
 	<div class="business-card">
 	<div class="col-md-4">
 
@@ -19,10 +20,6 @@
 											<% end %>
 										<% end %>
 										<button type="button" class="btn btn-danger btn-sm w-sm waves-effect m-t-10 waves-light">Message</button>
-
-										<% if @user.stream_username %>
-										<h3 id="stream-status"></h3>
-										<% end %>
 										
 										
 										<div class="text-center m-t-40">
@@ -44,6 +41,7 @@
 						</div> <!-- end card-box -->
 	
 	</div>
+	</div>
 
 	<div class="col-md-8">
 
@@ -51,7 +49,7 @@
 					<div class="stream">
 						<iframe
 								src="https://player.twitch.tv/?channel=<%= @user.stream_username %>"
-								height="510"
+								height="400"
 								width="600"
 								frameborder="0"
 								scrolling="no"
@@ -62,7 +60,7 @@
 							scrolling="no"
 							id="juicetrades"
 							src="https://www.twitch.tv/<%= @user.stream_username %>/chat"
-							height="510"
+							height="400"
 							width="300">
 						</iframe>
 						</div>
@@ -76,11 +74,30 @@
 
 
 <div class="row second-profile-content">
+	<div class="container">
+	<div class="row">
 	<div class="col-md-6">
-	<h2>Following</h2>
-	<%  @followed.each do |followed| %>
-						<a href="users/<%= followed.id %>"><%= image_tag(followed.avatar.url, class: "friends-list") %></a>
-	<% end %>
+
+	 <div class="widget widget-friends">
+                      <div class="widget-header">
+                        <h3 class="widget-caption">Friends</h3>
+                      </div>
+                      <div class="widget-body bordered-top  bordered-nav">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <ul class="img-grid" style="margin: 0 auto;">
+                              <% @user.followed.each do |user| %>
+                              <li>
+                                <a href="/users/<%= user.id %>">
+                                  <img src="<%= user.avatar.url %>" alt="image">
+                                </a>
+                              </li>
+                              <% end %>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 	
 	</div>
 	<div class="col-md-6">
@@ -88,7 +105,7 @@
 	<!-- users posts -->
 	
 	<% @user.posts.by_date.each do |post| %>
-			<div class="feed panel panel-default">
+			<div class="feed2 panel panel-default">
 				<div class="panel-heading">
 					<%= image_tag post.user.avatar.url, height: '100', width: '150', class: "post-pic" %>
 				<div><strong>            
@@ -116,6 +133,8 @@
 	<% end %>
 	
 	</div>
+</div>
+</div>
 </div>
 
 
