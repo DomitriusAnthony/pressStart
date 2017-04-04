@@ -53,9 +53,9 @@
 			<div class="col-md-3">
 
 				<div class="followed-users">
-				
-			 		<%  @followed.each do |followed| %>
-						<a href="users/<%= followed.id %>"><%= image_tag(followed.avatar.url, class: "friends-list") %></a>
+					<h2>All Users</h2>
+			 		<%  @users.each do |user| %>
+						<a href="users/<%= user.id %>"><%= image_tag(user.avatar.url, class: "friends-list") %></a>
 			 		<% end %>
 
 				 </div>

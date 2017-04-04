@@ -27,5 +27,7 @@ Rails.application.routes.draw do
   end
 
   get 'users/:id/inbox' => "inbox#inbox"
+
+  get '/streams' => "users#streams"
  end
 

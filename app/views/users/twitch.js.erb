@@ -1,0 +1,23 @@
+$(document).ready(function(){
+<% if @user.stream_username %>
+	$.ajax({
+		type:"GET",
+		url:"https://api.twitch.tv/kraken/streams/<%= user.stream_username %>"
+		headers:{
+			"Client-ID" : "nf35s3wvwtxyum14ny3b272q7jid2c"
+		},
+		success: function(data1){
+		if(data1.stream===null){
+			$("#stream-status").html("ONLINE")
+		}
+		else{
+			$("#stream-status").html("OFFLINE")
+		}
+	}
+		
+})
+<% end %>
+
+})
+
+

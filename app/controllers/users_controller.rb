@@ -5,7 +5,14 @@ class UsersController < ApplicationController
     @users = User.all
     @posts = Post.all
 
+    @followed = current_user.followed if signed_in?
+
   	end
+
+    def streams
+    @users = User.all  
+
+    end
 
   	def follow
     	current_user.follow!(User.find(params[:id]))
