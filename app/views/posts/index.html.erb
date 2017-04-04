@@ -9,7 +9,9 @@
                 <div class="user-heading round">
                 	<img src="<%= current_user.avatar.url %>">
                     <h1><%= current_user.username %></h1>
+                    <% if current_user.fname && current_user.lname %>
                   <p><%= current_user.fname + " " + current_user.lname %></p>
+                  <% end %>
                 </div>
 
                 <ul class="nav nav-pills nav-stacked">
