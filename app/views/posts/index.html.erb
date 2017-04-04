@@ -87,10 +87,11 @@
                                   </div>
                       
                                   <div class="col-xs-3 text-right">
-                                  <% if current_user.followed.include?(@user) %>
+                                  <% if user.followers.include?(current_user) %>
+                                  	<a href="/users/<%= user.id %>/follow/destroy"><btn class="btn btn-sm btn-red btn-icon"><i class="fa fa-minus-square"></i></btn></a>
+								 <% else %>
                                   	<a href="/users/<%= user.id %>/follow"><btn class="btn btn-sm btn-azure btn-icon"><i class="fa fa-user-plus"></i></btn></a>
-                                  <% else %>
- 									<a href="/users/<%= user.id %>/follow/destroy"><btn class="btn btn-sm btn-red btn-icon"><i class="fa fa-minus-square"></i></btn></a>
+ 									
                                   <% end %>
                                   </div>
 
