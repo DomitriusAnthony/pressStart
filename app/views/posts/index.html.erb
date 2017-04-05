@@ -47,24 +47,41 @@
                         <span class="description"><%= post.created_at.strftime('%Y %b %d') %></span>
                       </div>
                     </div>
-
+                    
                     <div class="box-body" style="display: block;">
                       <p><%= raw(post.body). truncate(358) %></p>
                       <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
                       <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
                       <span class="pull-right text-muted">0 likes - 0 comments</span>
                     </div>
-<!--                       <div class="box-footer" style="display: block;">
+                    <% if post.comments %>
+                    <% @comments.each do |comment| %>
+                    <div class="box-footer box-comments" style="display: block;">
+                      <div class="box-comment">
+                        <img class="img-circle img-sm" src="<%= comment.user.avatar.url %>" alt="User Image">
+                        <div class="comment-text">
+                          <span class="username">
+                          <%= comment.user.username %>
+                          <span class="text-muted pull-right"><%= comment.created_at.strftime('%Y %b %d') %></span>
+                          </span>
+                          <%= raw comment.body %>
+                        </div>
+                      </div>
+                      </div>
+                      <% end %>
+                      <% end %>
+                      <div class="box-footer" style="display: block;">
                       <form action="/posts/<%= post.id %>/comments" method="post">
                         <img class="img-responsive img-circle img-sm" src="<%= post.user.avatar.url %>" alt="Alt Text">
                         <div class="img-push">
+                          <input type="hidden" value="<%= current_user.id %>" name="user_id"/>
                           <input type="hidden" value="<%= form_authenticity_token() %>" name="authenticity_token"/>
                           <input name="body" class="form-control input-sm" placeholder="Press enter to post comment">
                         </div>
                       </form>
-                    </div> -->
+                    </div>
                   </div><!--  end posts-->
-                          <% end %>
+                  <% end %>
                 </div>
             </div><!-- end left posts-->
             <div class="col-md-3">
@@ -92,7 +109,7 @@
                                           <div class="col-xs-3 text-right">
                                           <% if user.followers.include?(current_user) %>
                                             <a href="/users/<%= user.id %>/follow/destroy"><btn class="btn btn-sm btn-red btn-icon"><i class="fa fa-minus-square"></i></btn></a>
-                         <% else %>
+                                          <% else %>
                                             <a href="/users/<%= user.id %>/follow"><btn class="btn btn-sm btn-azure btn-icon"><i class="fa fa-user-plus"></i></btn></a>
                           
                                           <% end %>
@@ -185,47 +202,39 @@
       <!-- Wrapper for slides -->
       <div class="carousel-inner">
           <div class="item active">
-            <img src="http://unsplash.s3.amazonaws.com/batch%209/barcelona-boardwalk.jpg" alt="First slide">
+            <img src="/assets/pressstart.jpg" alt="First slide">
                     <!-- Static Header -->
                     <div class="header-text hidden-xs">
                         <div class="col-md-12 text-center">
-                            <h2>
-                              <span>Welcome to <strong>LOREM IPSUM</strong></span>
-                            </h2>
                             <br>
                             <br>
                             <div class="">
-                                <a class="btn btn-theme btn-sm btn-min-block" href="#">Login</a><a class="btn btn-theme btn-sm btn-min-block" href="#">Register</a></div>
+                                <a class="btn btn-theme btn-sm btn-min-block" href="#"></a><a class="btn btn-theme btn-sm btn-min-block" href="#"></a></div>
                         </div>
                     </div><!-- /header-text -->
           </div>
           <div class="item">
-            <img src="http://unsplash.s3.amazonaws.com/batch%209/barcelona-boardwalk.jpg" alt="Second slide">
+            <img src="/assets/pressstart.jpg" alt="Second slide">
             <!-- Static Header -->
                     <div class="header-text hidden-xs">
                         <div class="col-md-12 text-center">
-                            <h2>
-                                <span>Welcome to LOREM IPSUM</span>
-                            </h2>
+                            
                             <br>
                             <br>
                             <div class="">
-                                <a class="btn btn-theme btn-sm btn-min-block" href="#">Login</a><a class="btn btn-theme btn-sm btn-min-block" href="#">Register</a></div>
+                                <a class="btn btn-theme btn-sm btn-min-block" href="#"></a><a class="btn btn-theme btn-sm btn-min-block" href="#"></a></div>
                         </div>
                     </div><!-- /header-text -->
           </div>
           <div class="item">
-            <img src="http://unsplash.s3.amazonaws.com/batch%209/barcelona-boardwalk.jpg" alt="Third slide">
+            <img src="/assets/pressstart.jpg" alt="Third slide">
             <!-- Static Header -->
                     <div class="header-text hidden-xs">
                         <div class="col-md-12 text-center">
-                            <h2>
-                                <span>Welcome to LOREM IPSUM</span>
-                            </h2>
                             <br>
                             <br>
                             <div class="">
-                                <a class="btn btn-theme btn-sm btn-min-block" href="#">Login</a><a class="btn btn-theme btn-sm btn-min-block" href="#">Register</a></div>
+                                <a class="btn btn-theme btn-sm btn-min-block" href="#"></a><a class="btn btn-theme btn-sm btn-min-block" href="#"></a></div>
                         </div>
                     </div><!-- /header-text -->
           </div>
