@@ -55,7 +55,7 @@
                       <span class="pull-right text-muted">0 likes - 0 comments</span>
                     </div>
                     <% if post.comments %>
-                    <% @comments.each do |comment| %>
+                    <% post.comments.each do |comment| %>
                     <div class="box-footer box-comments" style="display: block;">
                       <div class="box-comment">
                         <img class="img-circle img-sm" src="<%= comment.user.avatar.url %>" alt="User Image">
