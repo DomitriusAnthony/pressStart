@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
 
   # Create action for new comment
   def create
-    @comment = Post.find(:post_id).comments.new
+    @comment = Post.find(params[:id]).comments.new
     @comment.update_attributes(comment_params)
 
     respond_to do |format|

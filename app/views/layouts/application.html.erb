@@ -36,6 +36,7 @@
             <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-left">
                   <li class="blog-nav-item"><%= link_to 'Home', root_path, class: "nav-link" %></li>
+                  <li class="blog-nav-item"><a class="nav-link" href="/streams">Streams</a></li>
                   <% if user_signed_in? %>
                     <!--This block is only visible to signed in users -->
                     <li class="blog-nav-item"><a href="/users/<%= current_user.id %>">
