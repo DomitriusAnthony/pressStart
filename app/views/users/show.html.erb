@@ -140,7 +140,7 @@
                     <% post.comments.each do |comment| %>
                     <div class="box-footer box-comments" style="display: block;">
                       <div class="box-comment">
-                        <img class="img-circle img-sm" src="<%= comment.user.avatar.url %>" alt="User Image">
+                        <img class="img-circle img-sm" src="<%= current_user.avatar.url %>" alt="User Image">
                         <div class="comment-text">
                           <span class="username">
                           <%= comment.user.username %>
@@ -154,7 +154,7 @@
                       <% end %>
                       <div class="box-footer" style="display: block;">
                       <form action="/posts/<%= post.id %>/comments" method="post">
-                        <img class="img-responsive img-circle img-sm" src="<%= post.user.avatar.url %>" alt="Alt Text">
+                        <img class="img-responsive img-circle img-sm" src="<%= current_user.avatar.url %>" alt="Alt Text">
                         <div class="img-push">
                           <input type="hidden" value="<%= current_user.id %>" name="user_id"/>
                           <input type="hidden" value="<%= form_authenticity_token() %>" name="authenticity_token"/>
