@@ -1,16 +1,33 @@
 class UsersController < ApplicationController
-	def show
-		@user = User.find(params[:id])
-		@feed = Post.feed(@user)
-    @users = User.all
-    @posts = Post.all
-
-    @followed = current_user.followed if signed_in?
+    def show
+  		@user = User.find(params[:id])
+      
+      @post = Post.new
+      @users = User.all
+      @posts = Post.all
+      @comment = Comment.new
+      
+      @followed = current_user.followed if signed_in?
 
   	end
 
+    def create
+      @post = User.find(current_user).posts.new
+      @post.update_attributes(post_params)
+
+      respond_to do |format|
+          if @post.save
+            format.html { redirect_to root_url, notice: 'Post was successfully created.' }
+            format.json { render :show, status: :created, location: @post }
+          else
+            format.html { render :new }
+            format.json { render json: @post.errors, status: :unprocessable_entity }
+          end
+        end
+    end
+
     def streams
-    @users = User.all  
+      @users = User.all  
 
     end
 

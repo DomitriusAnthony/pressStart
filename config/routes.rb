@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   	resources :comments
     resources :users
   end
+
+  post "/posts/:id/comments" => "comments#create"
   
   devise_for :users, controllers: { :registrations => "registrations" } do 
     	resources :users, :only => [:show]

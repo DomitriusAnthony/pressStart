@@ -1,8 +1,8 @@
 class CommentsController < ApplicationController
 
   # Runs private methods defined lower before certain actions, in order to DRY up code
-  before_action :find_comment, only: [:edit, :update, :show, :destroy]
-  before_action :find_post, only: [:new, :create, :edit, :update, :show, :destroy]
+  # before_action :find_post, only: [:new, :create, :edit, :update, :destroy]
+  # before_action :find_comment, only: [:edit, :update, :show, :destroy]
 
   # New action for creating comment
   def new
@@ -11,15 +11,17 @@ class CommentsController < ApplicationController
 
   # Create action for new comment
   def create
-    @comment = @post.comments.new
+    @comment = Post.find(:post_id).comments.new
     @comment.update_attributes(comment_params)
-    @comment.update_attributes(user_id: current_user.id)
-    if @comment.save
-      flash[:notice] = "Successfully created comment!"
-      redirect_to post_path(@post)
-    else
-      flash[:alert] = "Error creating new comment!"
-      render :new
+
+    respond_to do |format|
+      if @comment.save
+        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
+        format.json { render :show, status: :created, location: @comment }
+      else
+        format.html { render :new }
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -27,12 +29,13 @@ class CommentsController < ApplicationController
   end
 
   def update
-    if @comment.update_attributes(comment_params)
-      flash[:notice] = "Successfully updated comment!"
-      redirect_to post_path(@post)
+    @comment = current_user.comments.create(comment_params)
+    if @comment
+      flash[:notice] = "Your comment was created successfully"
+      redirect_to post_path Post.find(@comment.post_id)
     else
-      flash[:alert] = "Error updating comment!"
-      render :edit
+      flas[:alert] = "There was a problem saving your comment."
+      redirect_to new_comment_path
     end
   end
 
@@ -46,18 +49,14 @@ class CommentsController < ApplicationController
   end
 
   private
+    # Use callbacks to share common setup or constraints between actions.
+    def find_post
+      @post = Post.find(params[:id])
+    end
 
-  # sets the params we get with each comment
-  def comment_params
-    params.require(:comment).permit(:body)
-  end
-
-  def find_comment
-    @comment = Comment.find(params[:id])
-  end
-
-  def find_post
-    @post = Post.find(params[:post_id])
-  end
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def comment_params
+      params.require(:comment).permit(:body, current_user, :post_id)
+    end
 
 end

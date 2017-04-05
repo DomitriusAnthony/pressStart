@@ -26,4 +26,5 @@ class User < ApplicationRecord
   def follow!(user)
     followed << user
   end
+
 end

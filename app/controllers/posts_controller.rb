@@ -7,7 +7,9 @@ class PostsController < ApplicationController
     session[:conversations] ||= []
     @users = User.all.where.not(id: current_user)
     @conversations = Conversation.includes(:recipient, :messages).find(session[:conversations])
-  
+    
+    @user = current_user
+    @feed = Post.feed(@user) if signed_in?
 
     @post = Post.new
     @posts = Post.all
@@ -41,7 +43,7 @@ class PostsController < ApplicationController
         format.html { redirect_to root_url, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
-        format.html { render :new }
+        # format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end

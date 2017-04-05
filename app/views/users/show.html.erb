@@ -100,37 +100,54 @@
                     </div>
 	
 	</div>
-	<div class="col-md-6">
+			<div class="col-md-6">
 
-	<!-- users posts -->
-	
-	<% @user.posts.by_date.each do |post| %>
-			<div class="feed2 panel panel-default">
-				<div class="panel-heading">
-					<%= image_tag post.user.avatar.url, height: '100', width: '150', class: "post-pic" %>
-				<div><strong>            
-			<div class="text-center">
-					<h5><%= link_to "#{User.find(post.user_id).username}", user_path(post.user_id)%></h5>
-												<i class="fa fa-calendar"></i><br><h6 class="blog-post-meta"><%= post.created_at.strftime('%Y %b %d') %></h6>
-										</div></strong></div>
-							 </div>
-								<div class="panel-body">
-										
-											<div class="text-center">
-												<p class="blog-post-meta"><%= raw(post.body). truncate(358) %></p>
-											</div>
-											<% if post.user_id %>
-											 <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+				<!-- users posts -->
+			<div class="feed">
 
+                <% current_user.posts.by_date.each do |post| %>
+                  <div class="box box-widget">
+                    <div class="box-header with-border">
+                      <div class="user-block">
+                        <img class="img-circle" src="<%= current_user.avatar.url %>" alt="User Image">
+                        <span class="username"><a href="#"><%= current_user.username %></a></span>
+                        <span class="description"><%= post.created_at.strftime('%Y %b %d') %></span>
+                      </div>
+                    </div>
 
-											 <% end %>
-										
-								</div>
-								<div class="panel-footer">
-										<input type="email" class="form-control" placeholder="Write a comment...">
-								</div>
-						</div>
-	<% end %>
+                    <div class="box-body" style="display: block;">
+                      <p><%= raw(post.body). truncate(358) %></p>
+                      <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
+                      <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
+                      <span class="pull-right text-muted">0 likes - 0 comments</span>
+                    </div>
+                  <% if @post.comments %>
+                  <% @post.comments.each do |comment| %>
+                  <div class="box-footer box-comments" style="display: block;">
+                    
+                      <div class="box-comment">
+                        <img class="img-circle img-sm" src="<%= post.user.avatar.url %>" alt="User Image">
+                        <div class="comment-text">
+                          <span class="username">
+                          <%= post.comment.user.username %>
+                          <span class="text-muted pull-right"><%= comment.created_at.strftime('%Y %b %d') %></span>
+                          </span>
+                          <%= raw comment.body %>
+                      </div>
+                    <% end %>
+                    <% end %>
+<!--                       <div class="box-footer" style="display: block;">
+                      <form action="/posts/<%= post.id %>/comments" method="post">
+                        <img class="img-responsive img-circle img-sm" src="<%= post.user.avatar.url %>" alt="Alt Text">
+                        <div class="img-push">
+                          <input type="hidden" value="<%= form_authenticity_token() %>" name="authenticity_token"/>
+                          <input name="body" class="form-control input-sm" placeholder="Press enter to post comment">
+                        </div>
+                      </form>
+                    </div> -->
+                  </div><!--  end posts-->
+                    <% end %>
+                </div>
 	
 	</div>
 </div>
