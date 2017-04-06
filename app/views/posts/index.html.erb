@@ -50,9 +50,11 @@
                     
                     <div class="box-body" style="display: block;">
                       <p><%= raw(post.body). truncate(358) %></p>
-                      <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
-                      <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
-                      <span class="pull-right text-muted">0 likes - 0 comments</span>
+                      <%= link_to post_upvote_path(post) do %>
+                      <i class="fa fa-thumbs-o-up btn btn-default btn-xs">Like</i>
+                      <% end %> 
+                      <span class="pull-right text-muted"><%= post.like_count %></span>
+
                     </div>
                     <% if post.comments %>
                     <% post.comments.each do |comment| %>
@@ -133,20 +135,6 @@
 
 
     <% else %>
-
-<!-- These posts show "read more" and can bring you to showing the posts -->
-
-<!-- 
-      <div class="col-lg-6 col-lg-offset-2 col-md-8 col-md-offset-1">
-        <% @posts.each do |post| %>
-          <div class="post-preview">
-            <div class="text-center">
-              <h5><%= link_to "#{User.find(post.user_id).username}", user_path(post.user_id)%></h5>
-              <h6 class="blog-post-meta"><%= post.created_at.strftime('%Y %b %d') %></h6>
-            <div class="text-center">
-              <%= link_to "READ MORE", post_path(post) %>
-            </div>
-            <% end %> -->
 
 
 

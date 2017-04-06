@@ -73,6 +73,13 @@ class PostsController < ApplicationController
     end
   end
 
+  def upvote
+      @post = Post.find(params[:id])
+      @post.vote_by voter: current_user
+      redirect_to :back
+  end
+
+
 
 
   private

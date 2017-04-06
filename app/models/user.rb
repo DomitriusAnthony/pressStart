@@ -21,6 +21,7 @@ class User < ApplicationRecord
   has_many :messages, :dependent => :destroy
   has_many :conversations, foreign_key: :sender_id, :dependent => :destroy
 
+  acts_as_voter
 
     # Class method to follow a user
   def follow!(user)

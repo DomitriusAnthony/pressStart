@@ -27,9 +27,12 @@ Rails.application.routes.draw do
 
     resources :messages, only: [:create]
   end
+  
+  get '/posts/like/:id', to: 'posts#upvote', as: 'post_upvote'
 
   get 'users/inbox/:id' => "inbox#inbox"
 
   get '/streams' => "users#streams"
+
  end
 

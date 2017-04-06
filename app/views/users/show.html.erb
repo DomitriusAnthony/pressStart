@@ -15,11 +15,15 @@
 										<% if current_user %>
 											<% if @user.followers.include?(current_user) %>
 													<%= link_to "Unfollow", destroy_user_follow_path, class: "btn btn-danger" %>
+										<button type="button" class="btn btn-danger btn-sm w-sm waves-effect m-t-10 waves-light"><a href="/users/inbox/:id">Message</a></button>
 											<% else %>
 												<%= link_to "Follow", user_follow_path, class: "btn btn-success btn-sm w-sm waves-effect m-t-10 waves-light" %>
 											<% end %>
 										<% end %>
-										<button type="button" class="btn btn-danger btn-sm w-sm waves-effect m-t-10 waves-light">Message</button>
+
+										
+
+
 										
 										
 										<div class="text-center m-t-40">
@@ -115,7 +119,7 @@
                     <div class="box-header with-border">
                       <div class="user-block">
                         <img class="img-circle" src="<%= post.user.avatar.url %>" alt="User Image">
-                        <span class="username"><a href="#"><%= post.user.username %></a></span>
+                        <span class="username"><a href="/users/<%= post.user.id %>"><%= post.user.username %></a></span>
                         <span class="description"><%= post.created_at.strftime('%Y %b %d') %></span>
                       </div>
                     </div>
@@ -133,8 +137,8 @@
                       <div class="box-comment">
                         <img class="img-circle img-sm" src="<%= post.user.avatar.url %>" alt="User Image">
                         <div class="comment-text">
-                          <span class="username">
-                          <%= post.comment.user.username %>
+                          <a href="/users/<%= post.user.id %>"><span class="username">
+                          <%= post.comment.user.username %></a>
                           <span class="text-muted pull-right"><%= comment.created_at.strftime('%Y %b %d') %></span>
                           </span>
                           <%= raw comment.body %>
