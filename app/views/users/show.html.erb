@@ -65,8 +65,12 @@
 						</iframe>
 						</div>
 		<% else %>
-			<h1> Add your Twitch username in your account details to show your stream!</h1> 
-			<a href="/users/edit"><button type="button" class="btn btn-success btn-sm w-sm waves-effect m-t-10 waves-light">Edit Details</button></a>     
+			<div class="missing-stream">
+			<h1 class="add-info"> Add your Twitch username in your account details to show your stream!</h1> 
+			<div class="edit-details">
+			<a href="/users/edit"><button type="button" class=" btn btn-success btn-sm w-sm waves-effect m-t-10 waves-light">Edit Details</button></a> 
+			</div>
+			</div>    
 		<% end %>
 	
 		</div>
@@ -106,12 +110,12 @@
 				<!-- users posts -->
 			<div class="feed">
 
-                <% current_user.posts.by_date.each do |post| %>
+                <% @user.posts.by_date.each do |post| %>
                   <div class="box box-widget">
                     <div class="box-header with-border">
                       <div class="user-block">
-                        <img class="img-circle" src="<%= current_user.avatar.url %>" alt="User Image">
-                        <span class="username"><a href="#"><%= current_user.username %></a></span>
+                        <img class="img-circle" src="<%= post.user.avatar.url %>" alt="User Image">
+                        <span class="username"><a href="#"><%= post.user.username %></a></span>
                         <span class="description"><%= post.created_at.strftime('%Y %b %d') %></span>
                       </div>
                     </div>
@@ -141,7 +145,7 @@
                     <% post.comments.each do |comment| %>
                     <div class="box-footer box-comments" style="display: block;">
                       <div class="box-comment">
-                        <img class="img-circle img-sm" src="<%= current_user.avatar.url %>" alt="User Image">
+                        <img class="img-circle img-sm" src="<%= comment.user.avatar.url %>" alt="User Image">
                         <div class="comment-text">
                           <span class="username">
                           <%= comment.user.username %>
