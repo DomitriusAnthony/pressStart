@@ -30,6 +30,8 @@ Rails.application.routes.draw do
   
   get '/posts/like/:id', to: 'posts#upvote', as: 'post_upvote'
 
+  get '/posts/unlike/:id', to: 'posts#downvote', as: 'post_downvote'
+
   get 'users/inbox/:id' => "inbox#inbox"
 
   get '/streams' => "users#streams"
