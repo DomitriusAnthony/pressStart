@@ -1,143 +1,143 @@
 <% if user_signed_in? %>
  <div class="container-fluid ">
-      <div class="row fix-padding">
-        <!-- left links -->
-        <div class="col-md-3 profile-div ">
-          <div class="profile-nav ">
-            <div class="widget">
-              <div class="widget-body">
-                <div class="user-heading round">
-                <img src="<%= current_user.avatar.url %>"/> 
-                    <h1><%= current_user.username %></h1>
-                    <% if current_user.fname && current_user.lname %>
-                  <p><%= current_user.fname + " " + current_user.lname %></p>
-                  <% end %>
-                </div>
+			<div class="row fix-padding">
+				<!-- left links -->
+				<div class="col-md-3 profile-div ">
+					<div class="profile-nav ">
+						<div class="widget">
+							<div class="widget-body">
+								<div class="user-heading round">
+								<img class="home-profile-pic" src="<%= current_user.avatar.url %>" /> 
+										<h1><%= current_user.username %></h1>
+										<% if current_user.fname && current_user.lname %>
+									<p><%= current_user.fname + " " + current_user.lname %></p>
+									<% end %>
+								</div>
 
-                <ul class="nav nav-pills nav-stacked">
-                  <li class="active"><a href="/users/edit"> <i class="fa fa-user"></i>Edit Details</a></li>
-                  <li>
-                    <a href="/users/inbox/:id"> 
-                      <i class="fa fa-envelope"></i> Messages 
-                      <span class="label label-info pull-right r-activity"></span>
-                    </a>
-                  </li>
-                  <li><a href="#"> <i class="fa fa-calendar"></i> Events</a></li>
-                  <li><a href="#"> <i class="fa fa-image"></i> Photos</a></li>
-                  <li><a href="#"> <i class="fa fa-share"></i> Browse</a></li>
-                  <li><a href="#"> <i class="fa fa-floppy-o"></i> Saved</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div><!-- end left links -->
+								<ul class="nav nav-pills nav-stacked">
+									<li class="active"><a href="/users/edit"> <i class="fa fa-user"></i>Edit Details</a></li>
+									<li>
+										<a href="/users/inbox/:id"> 
+											<i class="fa fa-envelope"></i> Messages 
+											<span class="label label-info pull-right r-activity"></span>
+										</a>
+									</li>
+									<li><a href="#"> <i class="fa fa-calendar"></i> Events</a></li>
+									<li><a href="#"> <i class="fa fa-image"></i> Photos</a></li>
+									<li><a href="#"> <i class="fa fa-share"></i> Browse</a></li>
+									<li><a href="#"> <i class="fa fa-floppy-o"></i> Saved</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div><!-- end left links -->
 
-              <div class="col-md-5">
-                <div class="feed">
-                <%= render 'form', post: @post %>
-
-
-                <% @feed.by_date.each do |post| %>
-                  <!--   posts -->
-                  <div class="box box-widget">
-                    <div class="box-header with-border">
-                      <div class="user-block">
-                        <img class="img-circle" src="<%= post.user.avatar.url %>" alt="User Image">
-                        <span class="username"><a href="#"><%= post.user.username %></a></span>
-                        <span class="description"><%= post.created_at.strftime('%Y %b %d') %></span>
-                      </div>
-                    </div>
-                    
-                    <div class="box-body" style="display: block;">
-                      <p><%= raw(post.body). truncate(358) %></p>
-                      <%= link_to post_upvote_path(post) do %>
-                      <i class="fa fa-thumbs-o-up btn btn-default btn-xs">Like</i>
-                      <% end %> 
-                     
+							<div class="col-md-5">
+								<div class="feed">
+								<%= render 'form', post: @post %>
 
 
-                      <span class="pull-right text-muted"><%= post.like_count %></span>
-
-                    </div>
-                    <% if post.comments %>
-                    <% post.comments.each do |comment| %>
-                    <div class="box-footer box-comments" style="display: block;">
-                      <div class="box-comment">
-                        <img class="img-circle img-sm" src="<%= comment.user.avatar.url %>" alt="User Image">
-                        <div class="comment-text">
-                          <span class="username">
-                          <%= comment.user.username %>
-                          <span class="text-muted pull-right"><%= comment.created_at.strftime('%Y %b %d') %></span>
-                          </span>
-                          <%= raw comment.body %>
-                        </div>
-                      </div>
-                      </div>
-                      <% end %>
-                      <% end %>
-                      <div class="box-footer" style="display: block;">
-                      <form action="/posts/<%= post.id %>/comments" method="post">
-                        <img class="img-responsive img-circle img-sm" src="<%= current_user.avatar.url %>" alt="Alt Text">
-                        <div class="img-push">
-                          <input type="hidden" value="<%= current_user.id %>" name="user_id"/>
-                          <input type="hidden" value="<%= form_authenticity_token() %>" name="authenticity_token"/>
-                          <input name="body" class="form-control input-sm" placeholder="Press enter to post comment">
-                        </div>
-                      </form>
-                    </div>
-                  </div><!--  end posts-->
-                  <% end %>
-                </div>
-            </div><!-- end left posts-->
-            <div class="col-md-3">
-              
-                 <div class="widget user-listing">
-                    <div class="widget-header">
-                      <h3 class="widget-caption">People You May Know</h3>
-                    </div>
-                    <div class="widget-body bordered-top bordered-nav">
-                      <div class="card">
-                          <div class="content">
-                            <%  @users.each do |user| %>
-                              <ul class="list-unstyled team-members">
-                                  <li>
-                                      <div class="row">
-                                          <div class="col-xs-3">
-                                              <div class="avatar">
-                                                  <a href="/users/<%= user.id %>"><img src="<%= user.avatar.url %>" class="img-circle img-no-padding img-responsive"></a>
-                                              </div>
-                                          </div>
-                                          <div class="col-xs-6">
-                                             <%= user.username %>
-                                          </div>
-                              
-                                          <div class="col-xs-3 text-right">
-                                          <% if user.followers.include?(current_user) %>
-                                            <a href="/users/<%= user.id %>/follow/destroy"><btn class="btn btn-sm btn-red btn-icon"><i class="fa fa-minus-square"></i></btn></a>
-                                          <% else %>
-                                            <a href="/users/<%= user.id %>/follow"><btn class="btn btn-sm btn-azure btn-icon"><i class="fa fa-user-plus"></i></btn></a>
-                          
-                                          <% end %>
-                                          </div>
-
-                                      </div>
-                                  </li>
-                              </ul>
-                              <% end %>
-                          </div>
-                      </div>          
-                    </div>
-                  </div><!-- End people you may know --> 
-                </div><!-- end right posts -->
-              </div>          
-          </div>
+								<% @feed.by_date.each do |post| %>
+									<!--   posts -->
+									<div class="box box-widget">
+										<div class="box-header with-border">
+											<div class="user-block">
+												<img class="img-circle" src="<%= post.user.avatar.url %>" alt="User Image">
+												<span class="username"><a href="#"><%= post.user.username %></a></span>
+												<span class="description"><%= post.created_at.strftime('%Y %b %d') %></span>
+											</div>
+										</div>
+										
+										<div class="box-body" style="display: block;">
+											<p><%= raw(post.body). truncate(358) %></p>
+											<%= link_to post_upvote_path(post) do %>
+											<i class="fa fa-thumbs-o-up btn btn-default btn-xs">Like</i>
+											<% end %> 
+										 
 
 
+											<span class="pull-right text-muted"><%= post.like_count %></span>
+
+										</div>
+										<% if post.comments %>
+										<% post.comments.each do |comment| %>
+										<div class="box-footer box-comments" style="display: block;">
+											<div class="box-comment">
+												<img class="img-circle img-sm" src="<%= comment.user.avatar.url %>" alt="User Image">
+												<div class="comment-text">
+													<span class="username">
+													<%= comment.user.username %>
+													<span class="text-muted pull-right"><%= comment.created_at.strftime('%Y %b %d') %></span>
+													</span>
+													<%= raw comment.body %>
+												</div>
+											</div>
+											</div>
+											<% end %>
+											<% end %>
+											<div class="box-footer" style="display: block;">
+											<form action="/posts/<%= post.id %>/comments" method="post">
+												<img class="img-responsive img-circle img-sm" src="<%= current_user.avatar.url %>" alt="Alt Text">
+												<div class="img-push">
+													<input type="hidden" value="<%= current_user.id %>" name="user_id"/>
+													<input type="hidden" value="<%= form_authenticity_token() %>" name="authenticity_token"/>
+													<input name="body" class="form-control input-sm" placeholder="Press enter to post comment">
+												</div>
+											</form>
+										</div>
+									</div><!--  end posts-->
+									<% end %>
+								</div>
+						</div><!-- end left posts-->
+						<div class="col-md-3">
+							
+								 <div class="widget user-listing">
+										<div class="widget-header">
+											<h3 class="widget-caption">People You May Know</h3>
+										</div>
+										<div class="widget-body bordered-top bordered-nav">
+											<div class="card">
+													<div class="content">
+														<%  @users.each do |user| %>
+															<ul class="list-unstyled team-members">
+																	<li>
+																			<div class="row">
+																					<div class="col-xs-3">
+																							<div class="avatar">
+																									<a href="/users/<%= user.id %>"><img src="<%= user.avatar.url %>" class="img-circle img-no-padding img-responsive"></a>
+																							</div>
+																					</div>
+																					<div class="col-xs-6">
+																						 <%= user.username %>
+																					</div>
+															
+																					<div class="col-xs-3 text-right">
+																					<% if user.followers.include?(current_user) %>
+																						<a href="/users/<%= user.id %>/follow/destroy"><btn class="btn btn-sm btn-red btn-icon"><i class="fa fa-minus-square"></i></btn></a>
+																					<% else %>
+																						<a href="/users/<%= user.id %>/follow"><btn class="btn btn-sm btn-azure btn-icon"><i class="fa fa-user-plus"></i></btn></a>
+													
+																					<% end %>
+																					</div>
+
+																			</div>
+																	</li>
+															</ul>
+															<% end %>
+													</div>
+											</div>          
+										</div>
+									</div><!-- End people you may know --> 
+								</div><!-- end right posts -->
+							</div>          
+					</div>
 
 
 
 
-    <% else %>
+
+
+		<% else %>
 
 
 
@@ -149,30 +149,30 @@
 
 
 <div class="stream home-stream">
-    <iframe
-      class= "stream-css"
-      src="https://player.twitch.tv/?channel=juicetrades"
-      height="500"
-      width="700"
-      frameborder="0"
-      scrolling="no"
-      allowfullscreen="true">
-    </iframe>
-         
-    <iframe
-      class="stream-css" 
-      frameborder="no"
-      scrolling="no"
-      id="juicetrades"
-      src="https://www.twitch.tv/juicetrades/chat"
-      height="500"
-      width="400">
-    </iframe>
+		<iframe
+			class= "stream-css"
+			src="https://player.twitch.tv/?channel=juicetrades"
+			height="500"
+			width="700"
+			frameborder="0"
+			scrolling="no"
+			allowfullscreen="true">
+		</iframe>
+				 
+		<iframe
+			class="stream-css" 
+			frameborder="no"
+			scrolling="no"
+			id="juicetrades"
+			src="https://www.twitch.tv/juicetrades/chat"
+			height="500"
+			width="400">
+		</iframe>
 </div>
 </div>
 
 <div class="col-md-12 empty-box">
-  
+	
 
 
 </div>
@@ -182,68 +182,68 @@
 
 <!-- image slideshow -->
 <div class="col-md-7">
-  <!-- Carousel -->
-      <div id="carousel-example-generic" class="carousel slide carousel-box" data-ride="carousel">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-          <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-          <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-          <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-      </ol>
-      <!-- Wrapper for slides -->
-      <div class="carousel-inner">
-          <div class="item active">
-            <img src="/assets/pressstart.jpg" alt="First slide">
-                    <!-- Static Header -->
-                    <div class="header-text hidden-xs">
-                        <div class="col-md-12 text-center">
-                            <br>
-                            <br>
-                            <div class="">
-                                <a class="btn btn-theme btn-sm btn-min-block" href="#"></a><a class="btn btn-theme btn-sm btn-min-block" href="#"></a></div>
-                        </div>
-                    </div><!-- /header-text -->
-          </div>
-          <div class="item">
-            <img src="/assets/pressstart.jpg" alt="Second slide">
-            <!-- Static Header -->
-                    <div class="header-text hidden-xs">
-                        <div class="col-md-12 text-center">
-                            
-                            <br>
-                            <br>
-                            <div class="">
-                                <a class="btn btn-theme btn-sm btn-min-block" href="#"></a><a class="btn btn-theme btn-sm btn-min-block" href="#"></a></div>
-                        </div>
-                    </div><!-- /header-text -->
-          </div>
-          <div class="item">
-            <img src="/assets/pressstart.jpg" alt="Third slide">
-            <!-- Static Header -->
-                    <div class="header-text hidden-xs">
-                        <div class="col-md-12 text-center">
-                            <br>
-                            <br>
-                            <div class="">
-                                <a class="btn btn-theme btn-sm btn-min-block" href="#"></a><a class="btn btn-theme btn-sm btn-min-block" href="#"></a></div>
-                        </div>
-                    </div><!-- /header-text -->
-          </div>
-      </div>
-      <!-- Controls -->
-      <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left"></span>
-      </a>
-      <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right"></span>
-      </a>
-    </div><!-- /carousel -->
+	<!-- Carousel -->
+			<div id="carousel-example-generic" class="carousel slide carousel-box" data-ride="carousel">
+			<!-- Indicators -->
+			<ol class="carousel-indicators">
+					<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+					<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+					<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+			</ol>
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner">
+					<div class="item active">
+						<img src="/assets/pressstart.jpg" alt="First slide">
+										<!-- Static Header -->
+										<div class="header-text hidden-xs">
+												<div class="col-md-12 text-center">
+														<br>
+														<br>
+														<div class="">
+																<a class="btn btn-theme btn-sm btn-min-block" href="#"></a><a class="btn btn-theme btn-sm btn-min-block" href="#"></a></div>
+												</div>
+										</div><!-- /header-text -->
+					</div>
+					<div class="item">
+						<img src="/assets/pressstart.jpg" alt="Second slide">
+						<!-- Static Header -->
+										<div class="header-text hidden-xs">
+												<div class="col-md-12 text-center">
+														
+														<br>
+														<br>
+														<div class="">
+																<a class="btn btn-theme btn-sm btn-min-block" href="#"></a><a class="btn btn-theme btn-sm btn-min-block" href="#"></a></div>
+												</div>
+										</div><!-- /header-text -->
+					</div>
+					<div class="item">
+						<img src="/assets/pressstart.jpg" alt="Third slide">
+						<!-- Static Header -->
+										<div class="header-text hidden-xs">
+												<div class="col-md-12 text-center">
+														<br>
+														<br>
+														<div class="">
+																<a class="btn btn-theme btn-sm btn-min-block" href="#"></a><a class="btn btn-theme btn-sm btn-min-block" href="#"></a></div>
+												</div>
+										</div><!-- /header-text -->
+					</div>
+			</div>
+			<!-- Controls -->
+			<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+					<span class="glyphicon glyphicon-chevron-left"></span>
+			</a>
+			<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+					<span class="glyphicon glyphicon-chevron-right"></span>
+			</a>
+		</div><!-- /carousel -->
 </div>
 
 <!-- landing page signup form -->
 <div class="col-md-4">
 <div class="signup-form">
-  <%= render "devise/registrations/new" %>
+	<%= render "devise/registrations/new" %>
 </div>
 </div>
 
