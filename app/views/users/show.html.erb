@@ -14,10 +14,12 @@
 										</div>
 										<% if current_user %>
 											<% if @user.followers.include?(current_user) %>
-													<%= link_to "Unfollow", destroy_user_follow_path, class: "btn btn-danger" %>
-										<button type="button" class="btn btn-danger btn-sm w-sm waves-effect m-t-10 waves-light"><a href="/users/inbox/:id">Message</a></button>
+												<%= link_to "Unfollow", destroy_user_follow_path, class: "btn btn-danger" %>
+												<button type="button" class="btn btn-danger btn-sm w-sm waves-effect m-t-10 waves-light"><a href="/users/inbox/:id">Message</a></button>
 											<% else %>
+											<% unless current_user %>
 												<%= link_to "Follow", user_follow_path, class: "btn btn-success btn-sm w-sm waves-effect m-t-10 waves-light" %>
+											<% end %>
 											<% end %>
 										<% end %>
 
@@ -107,6 +109,7 @@
                         </div>
                       </div>
                     </div>
+                    <h1 id="stream-status"></h1>
 	
 	</div>
 			<div class="col-md-6">
