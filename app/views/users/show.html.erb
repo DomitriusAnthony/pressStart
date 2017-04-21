@@ -129,9 +129,11 @@
 
                     <div class="box-body" style="display: block;">
                       <p><%= raw(post.body). truncate(358) %></p>
-                      <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
-                      <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
-                      <span class="pull-right text-muted">0 likes - 0 comments</span>
+						<%= link_to post_upvote_path(post) do %>
+						<i class="fa fa-thumbs-o-up btn btn-default btn-xs">Like</i>
+						<% end %> 
+						
+						<span class="pull-right text-muted"><%= post.like_count %></span>
                     </div>
                   <% if @post.comments %>
                   <% @post.comments.each do |comment| %>
